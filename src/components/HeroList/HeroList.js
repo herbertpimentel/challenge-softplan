@@ -32,15 +32,21 @@ const HeroList = ({ fetching, total, heroes, fetchHeroes }) => {
           type="text"
           value={nameStartsWith}
           onChange={(e) => setNameStartsWith(e.target.value)}
-          placeholder="Encontre seu personagem favorito"
+          placeholder="Encontre seu personagem"
         />
       </form>
 
-      <div className="heroes-grid">
-        {fetching && (
-          <div className="heroes-grid-status-indicator">carregando...</div>
-        )}
+      {fetching && (
+        <div className="heroes-grid-status-indicator">carregando...</div>
+      )}
 
+      {!fetching && heroes.length === 0 && (
+        <div className="heroes-grid-status-indicator">
+          Nenhum resultado encontrado
+        </div>
+      )}
+
+      <div className="heroes-grid">
         {heroes.map((hero) => {
           return (
             <Link key={hero.id} to={`/${hero.id}`}>
@@ -48,12 +54,6 @@ const HeroList = ({ fetching, total, heroes, fetchHeroes }) => {
             </Link>
           );
         })}
-
-        {!fetching && heroes.length === 0 && (
-          <div className="heroes-grid-status-indicator">
-            Nenhum resultado encontrado
-          </div>
-        )}
       </div>
 
       {heroes.length < total && (

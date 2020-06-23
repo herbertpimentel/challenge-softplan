@@ -1,7 +1,6 @@
 import api from '../lib/api';
 
 const initialState = {
-  initialized: false,
   error: null,
   fetching: false,
   total: 0,
